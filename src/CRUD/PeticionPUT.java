@@ -10,24 +10,16 @@ import java.time.Duration;
 public class PeticionPUT {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_2)
+            .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        String user = new StringBuilder()
-                .append("{")
-                .append("\"id\":\"1\",")
-                .append("\"nombre\":\"Marcos\",")
-                .append("\"edad\":\"24\"")
-                .append("}").toString();
-
         HttpRequest request = HttpRequest.newBuilder()
-                .PUT(HttpRequest.BodyPublishers.ofString(user))
-                .uri(URI.create("https://httpbin.org/put"))
-                .setHeader("NombreHeader", "Header Http")
-                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.noBody())
+                .uri(URI.create("http://localhost:8090/api/v1/student/1?name=Roberto&email=roberto@gmail.com"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot")
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

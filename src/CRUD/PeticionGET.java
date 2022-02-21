@@ -10,7 +10,7 @@ import java.time.Duration;
 public class PeticionGET {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_2)
+            .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
@@ -18,8 +18,8 @@ public class PeticionGET {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("https://httpbin.org/get?name=peticionGet"))
-                .setHeader("NombreHeader", "Header Http")
+                .uri(URI.create("http://localhost:8090/api/v1/student"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot")
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

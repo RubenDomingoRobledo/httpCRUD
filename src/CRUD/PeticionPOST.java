@@ -10,7 +10,7 @@ import java.time.Duration;
 public class PeticionPOST {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_2)
+            .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
@@ -18,15 +18,16 @@ public class PeticionPOST {
 
         String user = new StringBuilder()
                 .append("{")
-                .append("\"id\":\"1\",")
-                .append("\"nombre\":\"Marcos\",")
-                .append("\"edad\":\"24\"")
+                .append("\"name\":\"Paco\",")
+                .append("\"email\":\"lucia@gmail.com\",")
+                .append("\"age\":\"55\",")
+                .append("\"date\":\"2020-09-03\"")
                 .append("}").toString();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(user))
-                .uri(URI.create("https://httpbin.org/post"))
-                .setHeader("NombreHeader", "Header Http")
+                .uri(URI.create("http://localhost:8090/api/v1/student"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot")
                 .header("Content-Type", "application/json")
                 .build();
 

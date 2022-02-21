@@ -10,7 +10,7 @@ import java.time.Duration;
 public class PeticionDELETE {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_2)
+            .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
@@ -18,8 +18,8 @@ public class PeticionDELETE {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .DELETE()
-                .uri(URI.create("https://httpbin.org/delete?name=peticionDelete"))
-                .setHeader("NombreHeader", "Header Http")
+                .uri(URI.create("http://localhost:8090/api/v1/student/12"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot")
                 .header("Content-Type", "application/json")
                 .build();
 

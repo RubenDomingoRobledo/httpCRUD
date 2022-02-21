@@ -18,7 +18,7 @@ public class GET {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("https://www.tomorrow.io/weather/US/MA/Boston/112589/hourly/"))
+                .uri(URI.create("https://api.tomorrow.io/v4/timelines?location=-73.98529171943665,40.75872069597532&fields=temperature&timesteps=1h&units=metric&apikey=vPWoQVZvS9quyaCnWv4SIGkXhRixyu3k"))
                 .setHeader("NombreHeader", "Header Http")
                 .build();
 
